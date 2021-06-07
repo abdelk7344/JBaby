@@ -1,22 +1,24 @@
 import React from 'react'
+import AnswerForm from './AnswerForm'
 
 
 class CountForm extends React.Component{
 
     constructor(){
         super()
-        this.state = {questionCount: ''}
+        this.state = {questionCount: '', parent: true, child: false, data: []}
         this.handleSubmit = this.handleSubmit.bind(this)
 
     }
 
     handleSubmit(event){
         event.preventDefault()
+        fetch('http://jservice.io/api/random?count='+document.getElementById('1').value)
+            .then(response => response.json())
+            .then(response => {
+                this.setState({questionCount: document.getElementById('1').value, parent: false, child: true, data: response})
 
-
-        this.setState({questionCount: document.getElementById('1').value})
-        console.log(document.getElementById('1').value)
-        console.log(this.state.questionCount)
+            })
 
     }
 
@@ -24,13 +26,20 @@ class CountForm extends React.Component{
         render(){
             return(
                 <div>
+                {this.state.parent &&
+                <div>
                     <p> How many questions would you like?</p>
                     <form onSubmit = {this.handleSubmit} > 
                         <input id = '1' type = 'number' placeholder ='e.g. 20' name = 'questionCount' ></input>
                         <button>Submit</button>
                     </form>
                     <p>Questions: {this.state.questionCount}</p>
+  
+                </div>}
+
+                    <AnswerForm show = {this.state.child} data = {this.state.data}/>
                 </div>
+          
                 
 
             )
