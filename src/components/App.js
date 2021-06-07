@@ -1,8 +1,14 @@
 import React from 'react'
+import Header from './Header'
+import CountForm from './CountForm'
 
 function App() {
   return (
-      <h1>Hello World</h1>
+    <div>
+      <Header/>
+      <CountForm/>
+    </div>
+      // <h1>Hello World</h1>
   );
 }
 
