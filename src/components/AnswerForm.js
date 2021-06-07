@@ -5,7 +5,6 @@ import DeservePoints from './DeservePoints'
 
 class AnswerForm extends React.Component{
 
-
     constructor(){
         super()
         this.state = {currIndex:0, correct: 0, wrong: 0, mula: 0, remquestions: 0, isCorrect:true}
@@ -19,33 +18,22 @@ class AnswerForm extends React.Component{
         this.setState(
             {remquestions: this.props.count-1}
         )
-        console.log('hi')
-        console.log(this.props.count)
     }
-
-
-
-
-
     handleSubmit(event) {
         event.preventDefault()
 
-
-   if (document.getElementById('answer').value.toUpperCase()===this.props.data[this.state.currIndex].answer.toUpperCase()){
-
-            this.setState(prevState=>{
-
-                return (
-              
-                    {currIndex:    this.state.remquestions>0 ? prevState.currIndex+=1 : prevState.currIndex,
-                    correct: prevState.correct+=1,
-                    isCorrect:true,
-                    mula: prevState.mula+=this.props.data[this.state.currIndex].value,
-                    remquestions: this.props.data.length - (this.state.correct+this.state.wrong) 
-                    }
-                )
-            })
-        }
+        if (document.getElementById('answer').value.toUpperCase()===this.props.data[this.state.currIndex].answer.toUpperCase()){
+                this.setState(prevState=>{
+                    return (
+                        {currIndex: prevState.remquestions===0?prevState.currIndex:prevState.currIndex+=1,
+                        correct: prevState.correct+=1,
+                        isCorrect:true,
+                        mula: prevState.mula+=this.props.data[this.state.currIndex].value,
+                        remquestions: prevState.remquestions-=1
+                        }
+                    )
+                })
+            }
 
         else{
             this.setState(prevState=>{
@@ -62,52 +50,44 @@ class AnswerForm extends React.Component{
         handleYes(){
             this.setState(prevState=>{
                 return (
-                    {currIndex:    this.state.remquestions>0 ? prevState.currIndex+=1 : prevState.currIndex,
+                    {currIndex: prevState.remquestions===0?prevState.currIndex:prevState.currIndex+=1,
                     correct: prevState.correct+=1,
                     isCorrect:true,
                     mula: prevState.mula+=this.props.data[this.state.currIndex].value,
-                    remquestions: this.props.data.length - (this.state.correct+this.state.wrong) 
+                    remquestions: prevState.remquestions-=1
                     }
                 )
             })
 
         
         }
-
         handleNo(){
-        this.setState(prevState=>{
-                return (
-                    {currIndex:    this.state.remquestions>0 ? prevState.currIndex+=1 : prevState.currIndex,
-                    wrong: prevState.wrong+=1,
-                    isCorrect:true,
-                    mula: prevState.mula-=this.props.data[this.state.currIndex].value,
-                    remquestions: this.props.data.length - (this.state.correct+this.state.wrong) 
-                    }
-                )
-            })
-            console.log("No")
-
+            this.setState(prevState=>{
+                    return (
+                        {currIndex: prevState.remquestions===0?prevState.currIndex:prevState.currIndex+=1,
+                        wrong: prevState.wrong+=1,
+                        isCorrect:true,
+                        mula: prevState.mula-=this.props.data[this.state.currIndex].value,
+                        remquestions: prevState.remquestions-=1 
+                        }
+                    )
+                })
         }
        
 
-
-
-
-    
-
-
     render(){
-     console.log("R:"+ this.state.remquestions)
-        this.state.currIndex===this.props.data.length-1 ? console.log("true") : console.log("false")
 
+        console.log("Answer: "+this.props.data[this.state.currIndex].answer)
+        console.log("Current Index: "+this.state.currIndex)
+        console.log("Remaining questions: "+this.state.remquestions)
         return (
-      
-        this.state.remquestions === -1 ?
-       
-        <h1>GAME OVER</h1> :
-            
+            this.state.remquestions===-1? 
             <div>
-                  {console.log(this.props.data[this.state.currIndex].answer)}
+                <h1>Game Over</h1>
+                <Status correct = {this.state.correct} wrong = {this.state.wrong} mula = {this.state.mula} remquestions = {this.state.remquestions}/>
+            </div>
+            :
+            <div>
                 <form onSubmit = {this.handleSubmit}>
                     <h3>Question: {this.props.data[this.state.currIndex].question} </h3>
                     <h4>Category: {this.props.data[this.state.currIndex].category.title}</h4>
@@ -116,8 +96,7 @@ class AnswerForm extends React.Component{
                     <button type='submit'>Submit</button>
                 </form>
                 {!this.state.isCorrect&&<DeservePoints answer={this.props.data[this.state.currIndex].answer} yes={this.handleYes} no={this.handleNo}/>}
-                
-             <Status correct = {this.state.correct} wrong = {this.state.wrong} mula = {this.state.mula} remquestions = {this.state.remquestions}/>
+                <Status correct = {this.state.correct} wrong = {this.state.wrong} mula = {this.state.mula} remquestions = {this.state.remquestions}/>
 
             </div> 
             
