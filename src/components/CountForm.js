@@ -18,15 +18,13 @@ class CountForm extends React.Component{
             .then(response => response.json())
             .then(response => {
                 this.setState({questionCount: document.getElementById('1').value, parent: false, child: true, data: response})
-
-            })
-
+        })
     }
 
 
-        render(){
-            return(
-                <div>
+    render(){
+        return(
+            <div>
                 {this.state.parent &&
                 <div>
                     <p> How many questions would you like?</p>
@@ -34,20 +32,11 @@ class CountForm extends React.Component{
                         <input id = '1' type = 'number' placeholder ='e.g. 20' name = 'questionCount' ></input>
                         <button>Submit</button>
                     </form>
-             
-  
                 </div>}
-                {this.state.child &&
-                    <AnswerForm count = {this.state.questionCount} show = {this.state.child} data = {this.state.data}/>}
-                </div>
-          
-                
-
-            )
-        }
-
-
-
+                {this.state.child &&<AnswerForm count = {this.state.questionCount} show = {this.state.child} data = {this.state.data}/>}
+            </div>
+        )
+    }
 
 }
 

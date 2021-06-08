@@ -21,8 +21,7 @@ class AnswerForm extends React.Component{
                 seconds:prevState.seconds+1,
                 interval:myInterval
                 }
-            }
-            )
+            })
         }, 1000);
 
     }
@@ -35,20 +34,19 @@ class AnswerForm extends React.Component{
     }
     handleSubmit(event) {
         event.preventDefault()
-
         if (document.getElementById('answer').value.toUpperCase()===this.props.data[this.state.currIndex].answer.toUpperCase()){
-                this.setState(prevState=>{
-                    return (
-                        {currIndex: prevState.remquestions===0?prevState.currIndex:prevState.currIndex+=1,
-                        correct: prevState.correct+=1,
-                        isCorrect:true,
-                        mula: prevState.mula+=this.props.data[this.state.currIndex].value,
-                        remquestions: prevState.remquestions-=1
-                        }
-                    )
-                })
-                this.fullReset()
-            }
+            this.setState(prevState=>{
+                return (
+                    {currIndex: prevState.remquestions===0?prevState.currIndex:prevState.currIndex+=1,
+                    correct: prevState.correct+=1,
+                    isCorrect:true,
+                    mula: prevState.mula+=this.props.data[this.state.currIndex].value,
+                    remquestions: prevState.remquestions-=1
+                    }
+                )
+            })
+            this.fullReset()
+        }
 
         else{
             this.stop()
@@ -96,7 +94,7 @@ class AnswerForm extends React.Component{
     }
 
     render(){
-        if(this.state.seconds===10){
+        if(this.state.seconds===10){//total seconds to wait
             this.handleNo()
         }
         console.log("Answer: "+this.props.data[this.state.currIndex].answer)
@@ -122,10 +120,6 @@ class AnswerForm extends React.Component{
                 <Status correct = {this.state.correct} wrong = {this.state.wrong} mula = {this.state.mula} remquestions = {this.state.remquestions}/>
 
             </div> 
-            
-           
-        
-     
 
 
         )
