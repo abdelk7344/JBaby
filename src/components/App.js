@@ -5,7 +5,7 @@ import CountForm from './CountForm'
 
 function App() {
   return (
-    <div>
+    <div className="appClass">
       <Header/>
       <CountForm/>
 

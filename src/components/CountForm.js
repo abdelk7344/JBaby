@@ -1,6 +1,6 @@
 import React from 'react'
 import AnswerForm from './AnswerForm'
-import './mystyles.css'
+
 
 
 class CountForm extends React.Component{
@@ -26,7 +26,7 @@ class CountForm extends React.Component{
 
         render(){
             return(
-                <div className = 'countform'>
+                <div>
                 {this.state.parent &&
                 <div>
                     <p> How many questions would you like?</p>
