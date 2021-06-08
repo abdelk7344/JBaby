@@ -1,5 +1,5 @@
 import React from 'react'
-
+import {Button} from 'react-bootstrap'
 
 
 class DeservePoints extends React.Component{
@@ -16,8 +16,8 @@ class DeservePoints extends React.Component{
         return(
             <div>
                 <h4>The correct answer is {this.props.answer}, Do you believe that your answer would be marked correct?</h4>
-                <button onClick={this.props.yes}>Yes</button>
-                <button onClick={this.props.no}>No</button>
+                <Button onClick={this.props.yes}>Yes</Button>
+                <Button onClick={this.props.no}>No</Button>
             </div>
         )
         

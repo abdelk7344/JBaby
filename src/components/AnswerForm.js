@@ -1,6 +1,8 @@
 import React from 'react'
 import Status from './Status'
 import DeservePoints from './DeservePoints'
+import { Button } from 'react-bootstrap';
+
 
 class AnswerForm extends React.Component{
 
@@ -123,6 +125,7 @@ class AnswerForm extends React.Component{
                     <h4>Value: {this.props.data[this.state.currIndex].value}</h4>
                     <input type='text' name="answer" id='answer'/>
                     <button type='submit'>Submit</button>
+                    <Button type='submit' variant="light">Submit</Button>
                 </form>
                 {!this.state.isCorrect&&<DeservePoints answer={this.props.data[this.state.currIndex].answer} yes={this.handleYes} no={this.handleNo}/>}
                 <Status correct = {this.state.correct} wrong = {this.state.wrong} mula = {this.state.mula} remquestions = {this.state.remquestions}/>
@@ -143,35 +146,3 @@ class AnswerForm extends React.Component{
 
 export default AnswerForm;
 
-
-
-
-    
-// newInterval(){
-//     let myInterval=setInterval(() => {
-//         this.setState(prevState=>{
-            // if (!this.state.isPaused){
-            //     return {
-            //     seconds:prevState.seconds+1,
-            //     interval:myInterval
-            //     }
-            // }
-//         }
-//         )
-//     }, 1000);
-
-// }
-// componentDidMount(){
-//     this.newInterval()
-// }
-// resetBtn(event){
-//     event.preventDefault()
-//     this.setState({seconds:0,isPaused:false})
-// }
-// reset(){
-//     this.stop()
-//     this.setState({seconds:0,isPaused:false})
-// }
-// stop(){
-//     this.setState({isPaused:true})
-// }

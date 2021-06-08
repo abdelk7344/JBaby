@@ -1,18 +1,16 @@
-* {
-    background-color: #060CE9;
-}
 .appClass{
-
-    font-family: 'Andale Mono', monospace;
+    font-family: 'Verdana';
     text-align: center;
-    color: white;
-
-
-    
+    color: black;
+    margin:20px;
 }
-button{
-    color:white
+/* *{
+    border:2px solid red;
+} */
+
+.formSpace{
+    padding:20px;
 }
-input{
-    color: white;
+.topSpace{
+    margin:10px auto;
 }

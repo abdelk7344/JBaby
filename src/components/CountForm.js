@@ -1,6 +1,6 @@
 import React from 'react'
 import AnswerForm from './AnswerForm'
-
+import {Button} from 'react-bootstrap'
 
 
 class CountForm extends React.Component{
@@ -26,11 +26,15 @@ class CountForm extends React.Component{
         return(
             <div>
                 {this.state.parent &&
-                <div>
-                    <p> How many questions would you like?</p>
-                    <form onSubmit = {this.handleSubmit} > 
-                        <input id = '1' type = 'number' placeholder ='e.g. 20' name = 'questionCount' ></input>
-                        <button>Submit</button>
+                <div className='container topSpace'>
+                    <h4>Instructions</h4>
+                    
+                    <p>Just choose how many questions you want to test yourself on.  Then, enter your answers below and see how many you can get correct!</p>
+                    <form onSubmit = {this.handleSubmit} className='formSpace' > 
+                        <p> How many questions would you like?</p>
+                        <input id = '1' type = 'number' placeholder ='e.g. 20' name = 'questionCount' className='form-control'></input>
+                        <br/>
+                        <Button type='submit' variant='secondary'>Submit</Button>
                     </form>
                 </div>}
                 {this.state.child &&<AnswerForm count = {this.state.questionCount} show = {this.state.child} data = {this.state.data}/>}
