@@ -6,7 +6,7 @@ class AnswerForm extends React.Component{
 
     constructor(){
         super()
-        this.state = {currIndex:0, correct: 0, wrong: 0, mula: 0, remquestions: 0, isCorrect:true,seconds:0,isPaused:false,interval:{}}
+        this.state = {currIndex:0, correct: 0, wrong: 0, mula: 0, remquestions: 0, isCorrect:true,seconds:0,isPaused:false,interval:null}
         this.handleSubmit = this.handleSubmit.bind(this)
         this.handleYes=this.handleYes.bind(this)
         this.handleNo=this.handleNo.bind(this)
@@ -18,7 +18,8 @@ class AnswerForm extends React.Component{
             this.setState(prevState=>{
                 if(!this.state.isPaused){
                     return {
-                        seconds:prevState.seconds+1
+                        seconds:prevState.seconds+1,
+                        interval:myInterval
                     }
 
                 }
@@ -90,6 +91,7 @@ class AnswerForm extends React.Component{
         this.setState({isPaused:true})
     }
     clear(){
+        
         clearInterval(this.state.interval)
     }
 
@@ -98,9 +100,10 @@ class AnswerForm extends React.Component{
             this.handleNo()
         }
         if (this.state.remquestions ===-1){
+            console.log('clear')
             this.clear()
         }
-  
+        console.log("interval: "+this.state.interval)
         console.log("Answer: "+this.props.data[this.state.currIndex].answer)
         console.log("Current Index: "+this.state.currIndex)
         console.log("Remaining questions: "+this.state.remquestions)
