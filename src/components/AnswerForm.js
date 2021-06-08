@@ -7,14 +7,29 @@ class AnswerForm extends React.Component{
 
     constructor(){
         super()
-        this.state = {currIndex:0, correct: 0, wrong: 0, mula: 0, remquestions: 0, isCorrect:true}
+        this.state = {currIndex:0, correct: 0, wrong: 0, mula: 0, remquestions: 0, isCorrect:true,seconds:0,interval:{}}
         this.handleSubmit = this.handleSubmit.bind(this)
         this.handleYes=this.handleYes.bind(this)
         this.handleNo=this.handleNo.bind(this)
+        this.newInterval=this.newInterval.bind(this)
+        this.fullReset=this.fullReset.bind(this)
         
+    }
+    newInterval(){
+        let myInterval=setInterval(() => {
+            this.setState(prevState=>{
+                return {
+                seconds:prevState.seconds+1,
+                interval:myInterval
+                }
+            }
+            )
+        }, 1000);
+
     }
 
     componentDidMount(){
+        this.newInterval()
         this.setState(
             {remquestions: this.props.count-1}
         )
@@ -33,50 +48,58 @@ class AnswerForm extends React.Component{
                         }
                     )
                 })
+                this.fullReset()
             }
 
         else{
+            this.stop()
             this.setState(prevState=>{
                 return ({isCorrect: false}
                 )
             })
         }
 
-        }
+    }
 
-
-
-
-        handleYes(){
-            this.setState(prevState=>{
-                return (
+    handleYes(){
+        this.fullReset()
+        this.newInterval()
+        this.setState(prevState=>{
+            return (
+                {currIndex: prevState.remquestions===0?prevState.currIndex:prevState.currIndex+=1,
+                correct: prevState.correct+=1,
+                isCorrect:true,
+                mula: prevState.mula+=this.props.data[this.state.currIndex].value,
+                remquestions: prevState.remquestions-=1
+                }
+            )
+        })  
+    }
+    handleNo(){
+        this.fullReset()
+        this.newInterval()
+        this.setState(prevState=>{
+            return (
                     {currIndex: prevState.remquestions===0?prevState.currIndex:prevState.currIndex+=1,
-                    correct: prevState.correct+=1,
+                    wrong: prevState.wrong+=1,
                     isCorrect:true,
-                    mula: prevState.mula+=this.props.data[this.state.currIndex].value,
-                    remquestions: prevState.remquestions-=1
+                    mula: prevState.mula-=this.props.data[this.state.currIndex].value,
+                    remquestions: prevState.remquestions-=1 
                     }
                 )
             })
-
-        
-        }
-        handleNo(){
-            this.setState(prevState=>{
-                    return (
-                        {currIndex: prevState.remquestions===0?prevState.currIndex:prevState.currIndex+=1,
-                        wrong: prevState.wrong+=1,
-                        isCorrect:true,
-                        mula: prevState.mula-=this.props.data[this.state.currIndex].value,
-                        remquestions: prevState.remquestions-=1 
-                        }
-                    )
-                })
-        }
-       
+    }
+    fullReset(){
+        this.setState({seconds:0})
+    }
+    stop(){
+        clearInterval(this.state.interval)
+    }
 
     render(){
-
+        if(this.state.seconds===10){
+            this.handleNo()
+        }
         console.log("Answer: "+this.props.data[this.state.currIndex].answer)
         console.log("Current Index: "+this.state.currIndex)
         console.log("Remaining questions: "+this.state.remquestions)
@@ -88,6 +111,7 @@ class AnswerForm extends React.Component{
             </div>
             :
             <div>
+                <h4>{this.state.seconds}</h4>
                 <form onSubmit = {this.handleSubmit}>
                     <h3>Question: {this.props.data[this.state.currIndex].question} </h3>
                     <h4>Category: {this.props.data[this.state.currIndex].category.title}</h4>
