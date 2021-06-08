@@ -6,28 +6,27 @@ class AnswerForm extends React.Component{
 
     constructor(){
         super()
-        this.state = {currIndex:0, correct: 0, wrong: 0, mula: 0, remquestions: 0, isCorrect:true,seconds:0,interval:{}}
+        this.state = {currIndex:0, correct: 0, wrong: 0, mula: 0, remquestions: 0, isCorrect:true,seconds:0,isPaused:false,interval:{}}
         this.handleSubmit = this.handleSubmit.bind(this)
         this.handleYes=this.handleYes.bind(this)
         this.handleNo=this.handleNo.bind(this)
-        this.newInterval=this.newInterval.bind(this)
         this.fullReset=this.fullReset.bind(this)
-        
-    }
-    newInterval(){
-        let myInterval=setInterval(() => {
-            this.setState(prevState=>{
-                return {
-                seconds:prevState.seconds+1,
-                interval:myInterval
-                }
-            })
-        }, 1000);
-
     }
 
     componentDidMount(){
-        this.newInterval()
+        let myInterval=setInterval(() => {
+            this.setState(prevState=>{
+                if(!this.state.isPaused){
+                    return {
+                        seconds:prevState.seconds+1
+                    }
+
+                }
+                else{
+                    return {interval:myInterval}
+                }
+            })
+        }, 1000);
         this.setState(
             {remquestions: this.props.count-1}
         )
@@ -60,10 +59,9 @@ class AnswerForm extends React.Component{
 
     handleYes(){
         this.fullReset()
-        this.newInterval()
         this.setState(prevState=>{
             return (
-                {currIndex: prevState.remquestions===0?prevState.currIndex:prevState.currIndex+=1,
+                {currIndex: prevState.remquestions<=0?prevState.currIndex:prevState.currIndex+=1,
                 correct: prevState.correct+=1,
                 isCorrect:true,
                 mula: prevState.mula+=this.props.data[this.state.currIndex].value,
@@ -74,10 +72,9 @@ class AnswerForm extends React.Component{
     }
     handleNo(){
         this.fullReset()
-        this.newInterval()
         this.setState(prevState=>{
             return (
-                    {currIndex: prevState.remquestions===0?prevState.currIndex:prevState.currIndex+=1,
+                    {currIndex: prevState.remquestions<=0?prevState.currIndex:prevState.currIndex+=1,
                     wrong: prevState.wrong+=1,
                     isCorrect:true,
                     mula: prevState.mula-=this.props.data[this.state.currIndex].value,
@@ -87,9 +84,12 @@ class AnswerForm extends React.Component{
             })
     }
     fullReset(){
-        this.setState({seconds:0})
+        this.setState({seconds:0,isPaused:false})
     }
     stop(){
+        this.setState({isPaused:true})
+    }
+    clear(){
         clearInterval(this.state.interval)
     }
 
@@ -97,9 +97,14 @@ class AnswerForm extends React.Component{
         if(this.state.seconds===10){//total seconds to wait
             this.handleNo()
         }
+        if (this.state.remquestions ===-1){
+            this.clear()
+        }
+  
         console.log("Answer: "+this.props.data[this.state.currIndex].answer)
         console.log("Current Index: "+this.state.currIndex)
         console.log("Remaining questions: "+this.state.remquestions)
+        
         return (
             this.state.remquestions===-1? 
             <div>
@@ -123,6 +128,9 @@ class AnswerForm extends React.Component{
 
 
         )
+
+
+
     }
 
 
@@ -131,3 +139,36 @@ class AnswerForm extends React.Component{
 
 
 export default AnswerForm;
+
+
+
+
+    
+// newInterval(){
+//     let myInterval=setInterval(() => {
+//         this.setState(prevState=>{
+            // if (!this.state.isPaused){
+            //     return {
+            //     seconds:prevState.seconds+1,
+            //     interval:myInterval
+            //     }
+            // }
+//         }
+//         )
+//     }, 1000);
+
+// }
+// componentDidMount(){
+//     this.newInterval()
+// }
+// resetBtn(event){
+//     event.preventDefault()
+//     this.setState({seconds:0,isPaused:false})
+// }
+// reset(){
+//     this.stop()
+//     this.setState({seconds:0,isPaused:false})
+// }
+// stop(){
+//     this.setState({isPaused:true})
+// }
