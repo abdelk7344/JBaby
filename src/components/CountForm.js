@@ -26,7 +26,7 @@ class CountForm extends React.Component{
         return(
             <div>
                 {this.state.parent &&
-                <div className='container topSpace'>
+                <div className='container componentStyling form'>
                     <h4>Instructions</h4>
                     
                     <p>Just choose how many questions you want to test yourself on.  Then, enter your answers below and see how many you can get correct!</p>

@@ -16,8 +16,8 @@ class DeservePoints extends React.Component{
         return(
             <div>
                 <h4>The correct answer is {this.props.answer}, Do you believe that your answer would be marked correct?</h4>
-                <Button onClick={this.props.yes}>Yes</Button>
-                <Button onClick={this.props.no}>No</Button>
+                <Button className='buttonSpace' onClick={this.props.yes}>Yes</Button>
+                <Button className='buttonSpace' onClick={this.props.no}>No</Button>
             </div>
         )
         

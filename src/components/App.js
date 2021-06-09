@@ -7,7 +7,6 @@ function App() {
   return (
     <div className="appClass">
       <Header/>
-      <hr/><br/>
       <CountForm/>
 
     </div>

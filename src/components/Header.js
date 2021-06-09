@@ -22,10 +22,9 @@ class Header extends React.Component{
     render(){
 
         return(
-            <div>
-                <h1 className = 'container topSpace'>Jeopardy! Training</h1>
+            <div className = 'container componentStyling heading'>
+                <h1>Jeopardy Training!</h1>
                 <Button variant='secondary' onClick={this.state.isPlaying? this.pauseMusica:this.playMusica}>{this.state.isPlaying? "Pause Music": "Play Music"}</Button>
-  
                 <audio  id="play"  src={musica} controls loop hidden/>
             </div>
         )

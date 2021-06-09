@@ -98,7 +98,7 @@ class AnswerForm extends React.Component{
     }
 
     render(){
-        if(this.state.seconds===10){//total seconds to wait
+        if(this.state.seconds===20){//total seconds to wait
             this.handleNo()
         }
         if (this.state.remquestions ===-1){
@@ -112,19 +112,20 @@ class AnswerForm extends React.Component{
         
         return (
             this.state.remquestions===-1? 
-            <div>
+            <div className="container componentStyling form">
                 <h1>Game Over</h1>
                 <Status correct = {this.state.correct} wrong = {this.state.wrong} mula = {this.state.mula} remquestions = {this.state.remquestions}/>
             </div>
             :
-            <div>
-                <h4>{this.state.seconds}</h4>
+            <div className="container componentStyling form">
+                <div className='topright'>Timer: {20-this.state.seconds}</div>
                 <form onSubmit = {this.handleSubmit}>
-                    <h3>Question: {this.props.data[this.state.currIndex].question} </h3>
-                    <h4>Category: {this.props.data[this.state.currIndex].category.title}</h4>
-                    <h4>Value: {this.props.data[this.state.currIndex].value}</h4>
-                    <input type='text' name="answer" id='answer'/>
-                    <button type='submit'>Submit</button>
+                    {/* <h4>Category: {this.props.data[this.state.currIndex].category.title} for ${this.props.data[this.state.currIndex].value} </h4> */}
+                    <h4 className='jcard'>{this.props.data[this.state.currIndex].category.title.toUpperCase()}<br/>${this.props.data[this.state.currIndex].value}</h4>
+                    <h3>{this.props.data[this.state.currIndex].question}</h3>
+                    
+                    <input type='text' name="answer" id='answer' className='form-control'/>
+                    <br/>
                     <Button type='submit' variant="light">Submit</Button>
                 </form>
                 {!this.state.isCorrect&&<DeservePoints answer={this.props.data[this.state.currIndex].answer} yes={this.handleYes} no={this.handleNo}/>}
