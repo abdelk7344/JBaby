@@ -29,10 +29,10 @@ class CountForm extends React.Component{
                 <div className='container componentStyling form'>
                     <h4>Instructions</h4>
                     
-                    <p>Just choose how many questions you want to test yourself on.  Then, enter your answers below and see how many you can get correct!</p>
+                    <p>Quizicle is a game that uses questions from the hit show Jeopardy!<br/> Just choose how many questions you want to test yourself on. <br/>Then, enter your answers below and see how many you can get correct!</p>
                     <form onSubmit = {this.handleSubmit} className='formSpace' > 
                         <p> How many questions would you like?</p>
-                        <input id = '1' max='100' type = 'number' placeholder ='e.g. 20' name = 'questionCount' className='form-control'></input>
+                        <input style = {{width: '25%', margin: 'auto'}} id = '1' max='100' type = 'number' placeholder ='e.g. 20' name = 'questionCount' className='form-control'></input>
                         <br/>
                         <Button type='submit' variant='secondary'>Submit</Button>
                     </form>
