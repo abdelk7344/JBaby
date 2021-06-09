@@ -48,6 +48,7 @@ class AnswerForm extends React.Component{
                 )
             })
             this.fullReset()
+            document.getElementById('answer').value=''
         }
 
         else{
@@ -62,6 +63,7 @@ class AnswerForm extends React.Component{
 
     handleYes(){
         this.fullReset()
+        document.getElementById('answer').value=''
         this.setState(prevState=>{
             return (
                 {currIndex: prevState.remquestions<=0?prevState.currIndex:prevState.currIndex+=1,
@@ -75,6 +77,7 @@ class AnswerForm extends React.Component{
     }
     handleNo(){
         this.fullReset()
+        document.getElementById('answer').value=''
         this.setState(prevState=>{
             return (
                     {currIndex: prevState.remquestions<=0?prevState.currIndex:prevState.currIndex+=1,
