@@ -2,9 +2,6 @@
     font-family: 'Verdana';
     text-align: center;
 }
-
-
-
 .topSpace{
     margin:10px auto;
 }
@@ -26,11 +23,16 @@
 }
 .heading{
     background:  #F55D3E;
-    /* background:  #011a27; */
+    
+}
+.darkheading{
+    background:  #011a27;
 }
 .form{
     background: #76BED0;
-    /* background: #063852; */
+}
+.darkform{
+    background: #063852;
 }
 .buttonSpace{
     margin: 10px;

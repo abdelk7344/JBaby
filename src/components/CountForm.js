@@ -24,20 +24,20 @@ class CountForm extends React.Component{
 
     render(){
         return(
-            <div>
+            <div id="form">
                 {this.state.parent &&
-                <div className='container componentStyling form'>
+                <div className={!this.props.darkTheme?'container componentStyling form':'container componentStyling darkform'}>
                     <h4>Instructions</h4>
                     
                     <p>Quizicle is a game that uses questions from the hit show Jeopardy!<br/> Just choose how many questions you want to test yourself on. <br/>Then, enter your answers below and see how many you can get correct!</p>
                     <form onSubmit = {this.handleSubmit} className='formSpace' > 
                         <p> How many questions would you like?</p>
-                        <input style = {{width: '25%', margin: 'auto'}} id = '1' max='100' type = 'number' placeholder ='e.g. 20' name = 'questionCount' className='form-control'></input>
+                        <input style = {{width: '25%', margin: 'auto'}} id = '1' min='0' max='100' type = 'number' placeholder ='e.g. 20' name = 'questionCount' className='form-control'></input>
                         <br/>
                         <Button type='submit' variant='secondary'>Submit</Button>
                     </form>
                 </div>}
-                {this.state.child &&<AnswerForm count = {this.state.questionCount} show = {this.state.child} data = {this.state.data}/>}
+                {this.state.child &&<AnswerForm darkTheme={this.props.darkTheme} count = {this.state.questionCount} show = {this.state.child} data = {this.state.data}/>}
             </div>
         )
     }

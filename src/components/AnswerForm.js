@@ -96,7 +96,6 @@ class AnswerForm extends React.Component{
         this.setState({isPaused:true})
     }
     clear(){
-        
         clearInterval(this.state.interval)
     }
 
@@ -104,30 +103,23 @@ class AnswerForm extends React.Component{
         if(this.state.seconds===20){//total seconds to wait
             this.handleNo()
         }
-        if (this.state.remquestions ===-1){
-            console.log('clear')
+        if (this.state.remquestions===-1){
             this.clear()
         }
-        console.log("interval: "+this.state.interval)
-        console.log("Answer: "+this.props.data[this.state.currIndex].answer)
-        console.log("Current Index: "+this.state.currIndex)
-        console.log("Remaining questions: "+this.state.remquestions)
         
         return (
             this.state.remquestions===-1? 
-            <div className="container componentStyling form">
+            <div className={!this.props.darkTheme?'container componentStyling form':'container componentStyling darkform'}>
                 <h1>Game Over</h1>
                 <Button onClick={()=> {window.location.reload()}} variant='secondary'>Play Again</Button>
                 <Status correct = {this.state.correct} wrong = {this.state.wrong} mula = {this.state.mula} remquestions = {this.state.remquestions}/>
             </div>
             :
-            <div className="container componentStyling form">
+            <div className={!this.props.darkTheme?'container componentStyling form':'container componentStyling darkform'}>
                 <div className='topright'>Timer: {20-this.state.seconds}</div>
                 <form onSubmit = {this.handleSubmit}>
-                    {/* <h4>Category: {this.props.data[this.state.currIndex].category.title} for ${this.props.data[this.state.currIndex].value} </h4> */}
                     <h4 className='jcard'>{this.props.data[this.state.currIndex].category.title.toUpperCase()}<br/>${this.props.data[this.state.currIndex].value}</h4>
                     <h3>{this.props.data[this.state.currIndex].question}</h3>
-                    
                     <input type='text' name="answer" id='answer' className='form-control'/>
                     <br/>
                     <Button type='submit' variant="light">Submit</Button>
@@ -139,8 +131,6 @@ class AnswerForm extends React.Component{
 
 
         )
-
-
 
     }
 

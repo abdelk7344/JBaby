@@ -19,12 +19,19 @@ class Header extends React.Component{
     }
 
 
-    render(){
 
+    render(){
+        if(this.props.darkTheme){
+            document.getElementById('root').style.background='linear-gradient(90deg, #011a27 50%, #063852 50%)'
+        }
+        else{
+            document.getElementById('root').style.background='linear-gradient(90deg, rgba(245,93,62,1) 50%, rgba(118,190,208,1) 50%)'
+        }
         return(
-            <div className = 'container componentStyling heading'>
+            <div id="header" className = {!this.props.darkTheme?'container componentStyling heading':'container componentStyling darkheading'}>
                 <h1>Quizicle!</h1>
-                <Button variant='secondary' onClick={this.state.isPlaying? this.pauseMusica:this.playMusica}>{this.state.isPlaying? "Pause Music": "Play Music"}</Button>
+                <Button className='buttonSpace' variant='secondary' onClick={this.state.isPlaying? this.pauseMusica:this.playMusica}>{this.state.isPlaying? "Pause Music": "Play Music"}</Button>
+                <Button className='buttonSpace' variant='secondary' onClick={this.props.changeTheme}>Dark Mode</Button>
                 <audio  id="play"  src={musica} controls loop hidden/>
             </div>
         )
