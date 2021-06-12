@@ -1,6 +1,8 @@
 import React from 'react'
 import musica from '../music.mp3'
 import {Button} from 'react-bootstrap'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faVolumeMute,faVolumeUp,faSun,faMoon } from '@fortawesome/free-solid-svg-icons'
 
 class Header extends React.Component{
     constructor(){
@@ -30,8 +32,10 @@ class Header extends React.Component{
         return(
             <div id="header" className = {!this.props.darkTheme?'container componentStyling heading':'container componentStyling darkheading'}>
                 <h1>Quizicle!</h1>
-                <Button className='buttonSpace' variant='secondary' onClick={this.state.isPlaying? this.pauseMusica:this.playMusica}>{this.state.isPlaying? "Pause Music": "Play Music"}</Button>
-                <Button className='buttonSpace' variant='secondary' onClick={this.props.changeTheme}>Dark Mode</Button>
+                {/* <Button className='buttonSpace' variant='secondary' onClick={this.state.isPlaying? this.pauseMusica:this.playMusica}>{this.state.isPlaying? "Pause Music": "Play Music"}</Button>
+                <Button className='buttonSpace' variant='secondary' onClick={this.props.changeTheme}>Dark Mode</Button> */}
+                <Button className='buttonSpace' variant='secondary' onClick={this.state.isPlaying? this.pauseMusica:this.playMusica}>{this.state.isPlaying? <FontAwesomeIcon icon={faVolumeMute} size="lg" />: <FontAwesomeIcon icon={faVolumeUp} size="lg"/>}</Button>
+                <Button className='buttonSpace' variant='secondary' onClick={this.props.changeTheme}>{this.props.darkTheme?<FontAwesomeIcon icon={faSun} size="lg" />:<FontAwesomeIcon icon={faMoon} size="lg" />}</Button>
                 <audio  id="play"  src={musica} controls loop hidden/>
             </div>
         )
