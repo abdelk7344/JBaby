@@ -29,7 +29,7 @@ class CountForm extends React.Component{
                 <div className={!this.props.darkTheme?'container componentStyling form':'container componentStyling darkform'}>
                     <h4>Instructions</h4>
                     
-                    <p>Quizicle is a game that uses questions from the hit show Jeopardy!<br/> Just choose how many questions you want to test yourself on. <br/>Then, enter your answers below and see how many you can get correct!</p>
+                    <p>Quikwiz is a game that uses questions from the hit show Jeopardy!<br/> Just choose how many questions you want to test yourself on. <br/>Then, enter your answers below and see how many you can get correct!</p>
                     <form onSubmit = {this.handleSubmit} className='formSpace' > 
                         <p> How many questions would you like?</p>
                         <input style = {{width: '25%', margin: 'auto'}} id = '1' min='0' max='100' type = 'number' placeholder ='e.g. 20' name = 'questionCount' className='form-control'></input>

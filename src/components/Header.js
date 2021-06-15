@@ -31,7 +31,7 @@ class Header extends React.Component{
         }
         return(
             <div id="header" className = {!this.props.darkTheme?'container componentStyling heading':'container componentStyling darkheading'}>
-                <h1>Quizicle!</h1>
+                <h1>Quikwiz!</h1>
                 {/* <Button className='buttonSpace' variant='secondary' onClick={this.state.isPlaying? this.pauseMusica:this.playMusica}>{this.state.isPlaying? "Pause Music": "Play Music"}</Button>
                 <Button className='buttonSpace' variant='secondary' onClick={this.props.changeTheme}>Dark Mode</Button> */}
                 <Button className='buttonSpace' variant='secondary' onClick={this.state.isPlaying? this.pauseMusica:this.playMusica}>{this.state.isPlaying? <FontAwesomeIcon icon={faVolumeMute} size="lg" />: <FontAwesomeIcon icon={faVolumeUp} size="lg"/>}</Button>
