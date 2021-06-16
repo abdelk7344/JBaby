@@ -111,8 +111,11 @@ class AnswerForm extends React.Component{
             this.state.remquestions===-1? 
             <div className={!this.props.darkTheme?'container componentStyling form':'container componentStyling darkform'}>
                 <h1>Game Over</h1>
+                <h4>Correct: {this.state.correct}</h4>
+                <h4>Wrong: {this.state.wrong}</h4>
+                <h4>Mula: {this.state.mula}</h4>
                 <Button onClick={()=> {window.location.reload()}} variant='secondary'>Play Again</Button>
-                <Status correct = {this.state.correct} wrong = {this.state.wrong} mula = {this.state.mula} remquestions = {this.state.remquestions}/>
+                {/* <Status correct = {this.state.correct} wrong = {this.state.wrong} mula = {this.state.mula} remquestions = {this.state.remquestions}/> */}
             </div>
             :
             <div className={!this.props.darkTheme?'container componentStyling form':'container componentStyling darkform'}>
