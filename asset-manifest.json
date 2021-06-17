@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/JBaby/static/css/main.600c88d0.chunk.css",
+    "main.js": "/JBaby/static/js/main.e9c7b14e.chunk.js",
+    "main.js.map": "/JBaby/static/js/main.e9c7b14e.chunk.js.map",
+    "runtime-main.js": "/JBaby/static/js/runtime-main.58461164.js",
+    "runtime-main.js.map": "/JBaby/static/js/runtime-main.58461164.js.map",
+    "static/css/2.4c97ca4f.chunk.css": "/JBaby/static/css/2.4c97ca4f.chunk.css",
+    "static/js/2.faed52b3.chunk.js": "/JBaby/static/js/2.faed52b3.chunk.js",
+    "static/js/2.faed52b3.chunk.js.map": "/JBaby/static/js/2.faed52b3.chunk.js.map",
+    "index.html": "/JBaby/index.html",
+    "static/css/2.4c97ca4f.chunk.css.map": "/JBaby/static/css/2.4c97ca4f.chunk.css.map",
+    "static/css/main.600c88d0.chunk.css.map": "/JBaby/static/css/main.600c88d0.chunk.css.map",
+    "static/js/2.faed52b3.chunk.js.LICENSE.txt": "/JBaby/static/js/2.faed52b3.chunk.js.LICENSE.txt",
+    "static/media/music.302c3028.mp3": "/JBaby/static/media/music.302c3028.mp3"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.58461164.js",
+    "static/css/2.4c97ca4f.chunk.css",
+    "static/js/2.faed52b3.chunk.js",
+    "static/css/main.600c88d0.chunk.css",
+    "static/js/main.e9c7b14e.chunk.js"
+  ]
+}
