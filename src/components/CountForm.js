@@ -14,7 +14,7 @@ class CountForm extends React.Component{
 
     handleSubmit(event){
         event.preventDefault()
-        fetch('http://jservice.io/api/random?count='+document.getElementById('1').value)
+        fetch('https://jservice.io/api/random?count='+document.getElementById('1').value)
             .then(response => response.json())
             .then(response => {
                 this.setState({questionCount: document.getElementById('1').value, parent: false, child: true, data: response})
