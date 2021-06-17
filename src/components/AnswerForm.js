@@ -36,7 +36,8 @@ class AnswerForm extends React.Component{
     }
     handleSubmit(event) {
         event.preventDefault()
-        if (document.getElementById('answer').value.toUpperCase()===this.props.data[this.state.currIndex].answer.toUpperCase()){
+        let correctAnswer=this.props.data[this.state.currIndex].answer.replaceAll('<i>','').replaceAll('</i>','').toUpperCase();
+        if (document.getElementById('answer').value.toUpperCase()===correctAnswer){
             this.setState(prevState=>{
                 return (
                     {currIndex: prevState.remquestions===0?prevState.currIndex:prevState.currIndex+=1,
