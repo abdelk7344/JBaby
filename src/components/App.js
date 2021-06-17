@@ -18,7 +18,6 @@ class App extends React.Component {
 
 
   render(){
-    console.log(<p>fkafjlasj</p>.innerHTML)
     return (
       <div className="appClass">
         <Header changeTheme={this.changeTheme} darkTheme={this.state.darkTheme}/>
