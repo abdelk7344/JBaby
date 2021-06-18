@@ -4,13 +4,6 @@ import {Button} from 'react-bootstrap'
 
 class DeservePoints extends React.Component{
 
-    constructor(){
-        super()
-        this.state = {}
-    }
-
-
-
 
     render(){
 

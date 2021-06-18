@@ -31,8 +31,6 @@ class CountForm extends React.Component{
                     }
                     return{'question':cleanQuestion,'answer':cleanAnswer,'value':cleanValue,'category':cleanCategory}
                 })
-                console.log(cleanData)
-                console.log(response)
                 this.setState({questionCount: document.getElementById('1').value, parent: false, child: true, data: cleanData})
         })
     }
