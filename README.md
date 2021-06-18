@@ -1,1 +1,1 @@
-Awesome Jepordy Game
+Awesome Jeopardy based Game
