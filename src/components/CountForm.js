@@ -33,7 +33,7 @@ class CountForm extends React.Component{
                 })
                 console.log(cleanData)
                 console.log(response)
-                this.setState({questionCount: document.getElementById('1').value, parent: false, child: true, data: response})
+                this.setState({questionCount: document.getElementById('1').value, parent: false, child: true, data: cleanData})
         })
     }
 
@@ -49,7 +49,7 @@ class CountForm extends React.Component{
                     <p>Quikwiz is a game that uses questions from the hit show Jeopardy!<br/> Just choose how many questions you want to test yourself on. <br/>Then, enter your answers below and see how many you can get correct!</p>
                     <form onSubmit = {this.handleSubmit} className='formSpace' > 
                         <p> How many questions would you like?</p>
-                        <input style = {{width: '25%', margin: 'auto'}} id = '1' min='0' max='100' type = 'number' placeholder ='e.g. 20' name = 'questionCount' className='form-control'></input>
+                        <input style = {{width: '25%', margin: 'auto'}} id = '1' min='1' max='100' type = 'number' placeholder ='e.g. 20' name = 'questionCount' className='form-control'></input>
                         <br/>
                         <Button type='submit' variant='secondary'>Submit</Button>
                     </form>

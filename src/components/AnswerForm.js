@@ -16,7 +16,6 @@ class AnswerForm extends React.Component{
     }
 
     componentDidMount(){
-        
         let myInterval=setInterval(() => {
             this.setState(prevState=>{
                 if(!this.state.isPaused){
@@ -37,24 +36,9 @@ class AnswerForm extends React.Component{
     }
     handleSubmit(event) {
         event.preventDefault()
-        let correctAnswer=this.props.data[this.state.currIndex].answer.replaceAll('<i>','').replaceAll('</i>','').replaceAll('<b>','').replaceAll('</b>','').replaceAll('\\', '').toUpperCase();
-
-        if (this.props.data[this.state.currIndex].question===""){
-            this.setState(prevState=>{
-                return (
-                    {currIndex: prevState.remquestions<=0?prevState.currIndex:prevState.currIndex+=1,
-                    correct: prevState.correct+=1,
-                    isCorrect:true,
-                    mula: prevState.mula+=500,
-                    remquestions: prevState.remquestions-=1
-                    }
-                )
-            })  
-            this.fullReset()
-        }
-
-
-       else if (document.getElementById('answer').value.toUpperCase()===correctAnswer){
+        const correctAnswer=this.props.data[this.state.currIndex].answer.toUpperCase()
+        
+        if (document.getElementById('answer').value.toUpperCase()===correctAnswer){
             this.setState(prevState=>{
                 return (
                     {currIndex: prevState.remquestions===0?prevState.currIndex:prevState.currIndex+=1,
@@ -71,21 +55,13 @@ class AnswerForm extends React.Component{
 
         else{
             this.stop()
-            this.setState(prevState=>{
-                return ({isCorrect: false}
-                )
-            })
+            this.setState({isCorrect: false})
         }
 
     }
 
-    handleYes(){
-
-        var myvalue = this.props.data[this.state.currIndex].value;
-        if (myvalue===null){
-            myvalue = 500;
-        }
-  
+    handleYes(event){
+        event.preventDefault()
         this.fullReset()
         document.getElementById('answer').value=''
         this.setState(prevState=>{
@@ -93,18 +69,13 @@ class AnswerForm extends React.Component{
                 {currIndex: prevState.remquestions<=0?prevState.currIndex:prevState.currIndex+=1,
                 correct: prevState.correct+=1,
                 isCorrect:true,
-                mula: prevState.mula+=myvalue,
+                mula: prevState.mula+=this.props.data[this.state.currIndex].value,
                 remquestions: prevState.remquestions-=1
                 }
             )
         })  
     }
     handleNo(){
-        var myvalue = this.props.data[this.state.currIndex].value;
-        if (myvalue===null){
-            myvalue = 500;
-        }
-
         this.fullReset()
         document.getElementById('answer').value=''
         this.setState(prevState=>{
@@ -112,7 +83,7 @@ class AnswerForm extends React.Component{
                     {currIndex: prevState.remquestions<=0?prevState.currIndex:prevState.currIndex+=1,
                     wrong: prevState.wrong+=1,
                     isCorrect:true,
-                    mula: prevState.mula-=myvalue,
+                    mula: prevState.mula-=this.props.data[this.state.currIndex].value,
                     remquestions: prevState.remquestions-=1 
                     }
                 )
@@ -130,45 +101,13 @@ class AnswerForm extends React.Component{
 
     render(){
 
-        var myvalue = this.props.data[this.state.currIndex].value;
-        if (myvalue===null){
-            myvalue = 500;
-        }
-
-   
-
-        // console.log('question'+ this.props.data[this.state.currIndex].question)
         if(this.state.seconds===20){//total seconds to wait
-            if(this.props.data[this.state.currIndex].question!==""){
-           
+            // if(this.props.data[this.state.currIndex].question!==""){
             this.handleNo()
-            }
+            // }
         }
         if (this.state.remquestions===-1){
             this.clear()
-        }
-
-        if (this.props.data[this.state.currIndex].question===""){
-   
-            return(
-
-                <div className={!this.props.darkTheme?'container componentStyling form':'container componentStyling darkform'}>
-                <div className='topright'>Timer: {20}</div>
-                <form onSubmit = {this.handleSubmit}>
-                    <h4 className='jcard'>LUCKY WIZ!</h4>
-                    <h3>You just earned a free $500</h3>
-
-                    <br/>
-                    <Button type='submit' variant="light">Next</Button>
-                </form>
-                {!this.state.isCorrect&&<DeservePoints answer={this.props.data[this.state.currIndex].answer} yes={this.handleYes} no={this.handleNo}/>}
-                <Status correct = {this.state.correct} wrong = {this.state.wrong} mula = {this.state.mula} remquestions = {this.state.remquestions}/>
-
-            </div> 
-
-
-
-            )
         }
         
         return (
@@ -179,20 +118,26 @@ class AnswerForm extends React.Component{
                 <h4>Wrong: {this.state.wrong}</h4>
                 <h4>Mula: {this.state.mula}</h4>
                 <Button onClick={()=> {window.location.reload()}} variant='secondary'>Play Again</Button>
-                {/* <Status correct = {this.state.correct} wrong = {this.state.wrong} mula = {this.state.mula} remquestions = {this.state.remquestions}/> */}
             </div>
             :
             <div className={!this.props.darkTheme?'container componentStyling form':'container componentStyling darkform'}>
                 <div className='topright'>Timer: {20-this.state.seconds}</div>
-                <form onSubmit = {this.handleSubmit}>
-                    <h4 className='jcard'>{this.props.data[this.state.currIndex].category.title.toUpperCase()}<br/>${myvalue}</h4>
-                    {/* {console.log('Current index: ' + this.state.currIndex)}
-                    {console.log(this.props.data[this.state.currIndex].question)} */}
-                    <h3>{this.props.data[this.state.currIndex].question}</h3>
-                    <input type='text' name="answer" id='answer' className='form-control'/>
-                    <br/>
-                    <Button type='submit' variant="light">Submit</Button>
-                </form>
+                { this.props.data[this.state.currIndex].category==='Lucky Wiz'?
+                    <form onSubmit = {this.handleYes}>
+                        <h4 className='jcard'>{this.props.data[this.state.currIndex].category.toUpperCase()}<br/>${this.props.data[this.state.currIndex].value}</h4>
+                        <h3>{this.props.data[this.state.currIndex].question}</h3>
+                        <Button type='submit' variant="light">Next</Button>
+                    </form>
+                :
+                    <form onSubmit = {this.handleSubmit}>
+                        <h4 className='jcard'>{this.props.data[this.state.currIndex].category.toUpperCase()}<br/>${this.props.data[this.state.currIndex].value}</h4>
+                        <h3>{this.props.data[this.state.currIndex].question}</h3>
+                        
+                        <input type='text' name="answer" id='answer' className='form-control'/>
+                        <br/>
+                        <Button type='submit' variant="light">Submit</Button>
+                    </form>                    
+                }
                 {!this.state.isCorrect&&<DeservePoints answer={this.props.data[this.state.currIndex].answer} yes={this.handleYes} no={this.handleNo}/>}
                 <Status correct = {this.state.correct} wrong = {this.state.wrong} mula = {this.state.mula} remquestions = {this.state.remquestions}/>
 
