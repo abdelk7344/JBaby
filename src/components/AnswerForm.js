@@ -63,7 +63,9 @@ class AnswerForm extends React.Component{
     handleYes(event){
         event.preventDefault()
         this.fullReset()
-        document.getElementById('answer').value=''
+        if(document.getElementById('answer')!==null){
+            document.getElementById('answer').value=''
+        }
         this.setState(prevState=>{
             return (
                 {currIndex: prevState.remquestions<=0?prevState.currIndex:prevState.currIndex+=1,
