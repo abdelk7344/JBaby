@@ -13,7 +13,7 @@ class DeservePoints extends React.Component{
 
 
     render(){
-        console.log(this.props.answer)
+
         let cleanAnswer= this.props.answer.replaceAll('<i>','').replaceAll('</i>','').replaceAll('<b>','').replaceAll('</b>','').replaceAll('\\', '');
         return(
             
