@@ -17,10 +17,6 @@ class AnswerForm extends React.Component{
 
     componentDidMount(){
         
-        for (var i=0; i<100;i++){
-            // console.log('question:' + i + this.props.data[i].question)
-            // console.log('value:' + this.props.data[i].value )
-        }
         let myInterval=setInterval(() => {
             this.setState(prevState=>{
                 if(!this.state.isPaused){
@@ -44,10 +40,6 @@ class AnswerForm extends React.Component{
         let correctAnswer=this.props.data[this.state.currIndex].answer.replaceAll('<i>','').replaceAll('</i>','').replaceAll('<b>','').replaceAll('</b>','').replaceAll('\\', '').toUpperCase();
 
         if (this.props.data[this.state.currIndex].question===""){
-
-
-            this.fullReset()
-            // document.getElementById('answer').value=''
             this.setState(prevState=>{
                 return (
                     {currIndex: prevState.remquestions<=0?prevState.currIndex:prevState.currIndex+=1,
@@ -58,11 +50,8 @@ class AnswerForm extends React.Component{
                     }
                 )
             })  
-  
-
+            this.fullReset()
         }
-
-
 
 
        else if (document.getElementById('answer').value.toUpperCase()===correctAnswer){

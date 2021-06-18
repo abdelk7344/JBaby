@@ -17,12 +17,29 @@ class CountForm extends React.Component{
         fetch('https://jservice.io/api/random?count='+document.getElementById('1').value)
             .then(response => response.json())
             .then(response => {
+                let cleanData= response.map(entry=>{
+                    const cleanValue= entry.value===null? 500:entry.value
+                    const cleanAnswer=entry.answer.replaceAll('<i>','').replaceAll('</i>','').replaceAll('<b>','').replaceAll('</b>','').replaceAll('\\', '')
+                    let cleanQuestion, cleanCategory
+                    if(entry.question===''){
+                        cleanCategory='Lucky Wiz'
+                        cleanQuestion='You just earned a free $500'
+                    }
+                    else{
+                        cleanCategory=entry.category.title
+                        cleanQuestion=entry.question
+                    }
+                    return{'question':cleanQuestion,'answer':cleanAnswer,'value':cleanValue,'category':cleanCategory}
+                })
+                console.log(cleanData)
+                console.log(response)
                 this.setState({questionCount: document.getElementById('1').value, parent: false, child: true, data: response})
         })
     }
 
 
     render(){
+        
         return(
             <div id="form">
                 {this.state.parent &&
